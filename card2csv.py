@@ -6,7 +6,7 @@
 # program in Adventures in Minecraft.
 
 import time
-
+import sys
 # Use this to force test harness that returns a test card every second
 #from cardreader import tester as cardreader
 
@@ -46,13 +46,16 @@ def writeCardToFile(card, filename):
   f.close()
 
 
-while True:
-  time.sleep(1)
-
-  if cardreader.isReady():
-    card = cardreader.read()
-    printCard(card)
-    writeCardToFile(card, CARD_FILENAME)
-
+try:
+    print "Start\n"
+    while True:
+        time.sleep(1)
+        if cardreader.isReady():
+            card = cardreader.read()
+            printCard(card)
+            writeCardToFile(card, CARD_FILENAME)
+except KeyboardInterrupt:
+      print "End\n"
+      sys.exit()
 
 # END
