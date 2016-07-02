@@ -9,6 +9,7 @@ import mcpi.minecraft as minecraft
 import mcpi.block as block
 import time
 import sys
+from math import cos, sin, radians, floor
 # Use this to force test harness that returns a test card every second
 #from cardreader import tester as cardreader
 
@@ -20,7 +21,7 @@ import cardreader
 
 GAP = block.AIR.id
 WALL = block.STONE.id
-
+DEPTH = 4
 try:
     mc = minecraft.Minecraft.create()
 except :
@@ -31,27 +32,25 @@ def printCard(card):
   for row in card:
     print(row)
 
+def sign(n):
+    return 1 if n > 0 else -1
+
 def buildBlocks(card):
     playerPos = mc.player.getTilePos()
-    px = playerPos.x + 1
+    angle = radians(mc.player.getRotation()) #the X is -90 degrees facing axis Z
+    px = playerPos.x
     py = playerPos.y
-    pz = playerPos.z + 1
-    x = px
-    y = py
-    z = pz
+    pz = playerPos.z
+    mc.player.setPos(px,py + DEPTH, pz)
     for i, row in enumerate(card):
-        line = ""
-        x = px
-
-        for col in row:
+        for j, col in enumerate(row):
             if col == 'X':
                 blockType = WALL
             else:
                 blockType = GAP
-            mc.setBlock(x, y, z, blockType)
-            x = x + 1
-        z = z + 1
-        if i > 7:
+            for c in range(DEPTH):
+                mc.setBlock(px + j - 4, py + c, pz + i - 4, blockType)
+        if i >= 7:
             break # ignore mirror test data at end of card buffer
 
 try:
