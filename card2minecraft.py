@@ -37,7 +37,7 @@ def sign(n):
 
 def buildBlocks(card):
     playerPos = mc.player.getTilePos()
-    angle = radians(mc.player.getRotation()) #the X is -90 degrees facing axis Z
+    angle = radians(90*floor(mc.player.getRotation()/90)) #get the integer full 90 degrees rotation
     px = playerPos.x
     py = playerPos.y
     pz = playerPos.z
@@ -49,7 +49,7 @@ def buildBlocks(card):
             else:
                 blockType = GAP
             for c in range(DEPTH):
-                mc.setBlock(px + j - 4, py + c, pz + i - 4, blockType)
+                mc.setBlock(px + ((j-4)*cos(angle) - (i-4)*sin(angle)), py + c, pz +  ((j-4)*sin(angle) + (i-4)*cos(angle)), blockType) #rotation transformation around the center of the 8x8 matrix
         if i >= 7:
             break # ignore mirror test data at end of card buffer
 
