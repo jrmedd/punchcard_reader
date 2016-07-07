@@ -21,7 +21,7 @@ import cardreader
 
 GAP = block.AIR.id
 WALL = block.STONE.id
-DEPTH = 4
+DEPTH = 1
 try:
     mc = minecraft.Minecraft.create()
 except :
