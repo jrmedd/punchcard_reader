@@ -37,7 +37,7 @@ def sign(n):
 
 def buildBlocks(card):
     playerPos = mc.player.getTilePos()
-    angle = radians(mc.player.getRotation()) #the X is -90 degrees facing axis Z
+    #angle = radians(mc.player.getRotation()) #the X is -90 degrees facing axis Z
     px = playerPos.x
     py = playerPos.y
     pz = playerPos.z
