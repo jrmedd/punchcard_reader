@@ -10,6 +10,7 @@ import mcpi.block as block
 import time
 import sys
 from math import cos, sin, radians, floor
+import random
 # Use this to force test harness that returns a test card every second
 #from cardreader import tester as cardreader
 
@@ -42,10 +43,12 @@ def buildBlocks(card):
     py = playerPos.y
     pz = playerPos.z
     mc.player.setPos(px,py + DEPTH, pz)
+    #random color for the WOOL block
+    rBlock = block.Block(35, random.randint(1,15))
     for i, row in enumerate(card):
         for j, col in enumerate(row):
             if col == 'X':
-                blockType = WALL
+                blockType = rBlock
             else:
                 blockType = GAP
             for c in range(DEPTH):
