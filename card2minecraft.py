@@ -58,6 +58,7 @@ def buildBlocks(card):
 
 try:
     print "Start\n"
+    mc.postToChat("READER IS READY.")
     while True:
         time.sleep(1)
         if cardreader.isReady():
